@@ -1,0 +1,12 @@
+<mat-card-header>
+  <mat-card-title align="center">
+    <h2>
+      Message History (<span>{{ messages.length }}</span>)
+    </h2>
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <mat-list>
+    <app-message-dashboard-table-list [messages]="messages"></app-message-dashboard-table-list>
+  </mat-list>
+</mat-card-content>

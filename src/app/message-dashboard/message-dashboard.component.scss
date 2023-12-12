@@ -1,0 +1,17 @@
+%message-dashboard__item {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.message-dashboard {
+  &__container {
+    display: flex;
+    flex-direction: column wrap;
+  }
+
+  &__form,
+  &__table {
+    &__container {
+      @extend %message-dashboard__item;
+    }
+  }
+}

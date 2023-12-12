@@ -1,0 +1,9 @@
+@for (message of messages; track message) {
+<app-message-dashboard-table-item [message]="message"></app-message-dashboard-table-item>
+} @empty {
+<mat-list-item>
+  <h3>
+    No messages yet.
+  </h3>
+</mat-list-item>
+}
