@@ -1,3 +1,5 @@
 <h3 matListItemTitle><span>{{ message.phone }}</span><span class="date">{{ message.sentAt | date:'medium' }}</span></h3>
 <code matListItemLine [innerText]="message.body"></code>
-<p matListItemLine class="length_indicator">{{ message.body.length }}/{{ MESSAGE_BODY_MAX_LENGTH }}</p>
+<p matListItemMeta class="length_indicator">
+  <app-body-length [body]="message.body"></app-body-length>
+</p>
