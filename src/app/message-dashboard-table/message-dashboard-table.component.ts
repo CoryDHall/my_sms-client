@@ -16,7 +16,9 @@ import { MessageDashboardTableListComponent } from './message-dashboard-table-li
 })
 export class MessageDashboardTableComponent implements OnInit {
   messages!: StoreMessage[];
-  numMessages: number = 0;
+  get numMessages(): number {
+    return this.messages.length;
+  }
 
   private subscription!: Subscription;
 
@@ -26,20 +28,19 @@ export class MessageDashboardTableComponent implements OnInit {
     ) {
     this.messages = [];
     this.subscription = this.store.messages$.subscribe((messages) => {
-      this.messages = messages;
-      this.numMessages = messages.length;
+      this.messages = messages.sort((a, b) => b.sentAt.getTime() - a.sentAt.getTime());
       this.ref.detectChanges();
     });
   }
 
   ngOnInit() {
-    this.store.add({
-      phone: '+17575602155' as StoreMessage['phone'],
-      body: 'Hello world!' as StoreMessage['body'],
-      sentAt: new Date() as StoreMessage['sentAt'],
-    });
-    setTimeout(() => {
-    }, 1000);
+    // this.store.add({
+    //   phone: '+17575602155' as StoreMessage['phone'],
+    //   body: 'Hello world!' as StoreMessage['body'],
+    //   sentAt: new Date() as StoreMessage['sentAt'],
+    // });
+    // setTimeout(() => {
+    // }, 1000);
     this.store.messages$.subscribe((messages) => {
       console.log('messages', messages);
     });
