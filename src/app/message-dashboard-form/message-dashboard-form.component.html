@@ -9,17 +9,21 @@
   <mat-card-content>
       <mat-form-field class="input-item">
         <mat-label>Phone number</mat-label>
-        <input matInput placeholder="To" formControlName="phone_number" required type="tel">
+        <input matInput placeholder="To" formControlName="phone_number" required type="tel" #phoneInput>
       </mat-form-field>
       <mat-form-field class="input-item">
         <mat-label>Message</mat-label>
-        <textarea matInput placeholder="Message" formControlName="body" required></textarea>
+        <textarea matInput placeholder="Message" formControlName="body" required cdkTextareaAutosize [cdkAutosizeMinRows]="3" #bodyInput></textarea>
         <mat-hint align="end">
           <app-body-length [body]="messageBody"></app-body-length>
         </mat-hint>
       </mat-form-field>
   </mat-card-content>
   <mat-card-actions align="end">
+    <button mat-raised-button color="accent" type="button" (click)="clearForm()">Clear</button>
     <button mat-raised-button color="primary" type="submit" [disabled]="!messageForm.valid">Send</button>
   </mat-card-actions>
 </form>
+<mat-card-footer>
+  <mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+</mat-card-footer>

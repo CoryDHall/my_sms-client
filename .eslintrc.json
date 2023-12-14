@@ -1,0 +1,83 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "comma-dangle": [
+          "warn", "always-multiline"
+        ],
+        "max-len": [
+          "warn", { "code": 120 }
+        ],
+        "array-element-newline": [
+          "warn", "consistent"
+        ],
+        "object-property-newline": [
+          "warn", { "allowAllPropertiesOnSameLine": true }
+        ],
+        "object-curly-newline": [
+          "warn", { "consistent": true }
+        ],
+        "object-curly-spacing": [
+          "warn", "always"
+        ],
+        "indent": [
+          "warn", 2
+        ],
+        "space-before-blocks": [
+          "warn", "always"
+        ],
+        "no-multi-spaces": [
+          "warn"
+        ],
+        "no-multiple-empty-lines": [
+          "warn", { "max": 1 }
+        ],
+        "newline-per-chained-call": [
+          "warn", { "ignoreChainWithDepth": 1 }
+        ],
+        "function-call-argument-newline": [
+          "warn", "consistent"
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {}
+    }
+  ]
+}

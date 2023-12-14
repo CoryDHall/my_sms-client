@@ -12,7 +12,7 @@ import { MessageBase } from '../../models/Message';
  * - sendMessage(message: MessageBase, onError?, onComplete?): creates a new message and stores it in the store
  */
 @Injectable({
-  providedIn: MessagesModule
+  providedIn: MessagesModule,
 })
 export class MessagesInterfaceService {
   constructor(private apiClient: ApiService, private messageStore: StoreService) { }
@@ -20,25 +20,27 @@ export class MessagesInterfaceService {
   /**
    * Fetches all messages from the server and stores them in the store
    */
-  requestAll(onError?: (error: any) => void, onComplete?: () => void) {
-    this.apiClient.getMessages().subscribe({
-      next: messages => {
-        this.messageStore.merge(messages)
-      },
-      error: onError,
-      complete: onComplete,
-    });
+  requestAll(onError?: <U>(error: U) => void, onComplete?: () => void) {
+    this.apiClient.getMessages()
+      .subscribe({
+        next: messages => {
+          this.messageStore.merge(messages)
+        },
+        error: onError,
+        complete: onComplete,
+      });
   }
 
   /**
    * Creates a new message and stores it in the store
    */
 
-  sendMessage(message: MessageBase, onError?: (error: any) => void, onComplete?: () => void) {
-    this.apiClient.createMessage(message).subscribe({
-      next: message => this.messageStore.add(message),
-      error: onError,
-      complete: onComplete,
-    });
+  sendMessage(message: MessageBase, onError?: <U>(error: U) => void, onComplete?: () => void) {
+    this.apiClient.createMessage(message)
+      .subscribe({
+        next: message => this.messageStore.add(message),
+        error: onError,
+        complete: onComplete,
+      });
   }
 }

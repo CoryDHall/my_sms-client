@@ -8,8 +8,8 @@ import { MatListModule } from '@angular/material/list';
   standalone: true,
   imports: [MessageDashboardTableItemComponent, MatListModule],
   templateUrl: './message-dashboard-table-list.component.html',
-  styleUrl: './message-dashboard-table-list.component.scss'
+  styleUrl: './message-dashboard-table-list.component.scss',
 })
 export class MessageDashboardTableListComponent {
-  @Input({ required: true}) messages!: StoreMessage[];
+  @Input({ required: true }) messages!: StoreMessage[];
 }

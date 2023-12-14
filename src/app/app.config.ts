@@ -13,5 +13,5 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom(HttpClientXsrfModule),
-  ]
+  ],
 };

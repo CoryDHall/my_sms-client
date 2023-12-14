@@ -22,17 +22,9 @@ export type StoreMessageMatchArg = StoreMessageMatcher | Partial<StoreMessage>;
  * The store service is responsible for managing the state of the messages
  * in the application. It is a singleton service that is provided in the
  * MessagesModule.
- *
- * provides the following methods:
- * - all(): returns all messages in the store
- * - add(message: StoreMessage): adds a message to the store
- * - add(messages: StoreMessage[]): adds several messages to the store
- * - update(matcher: StoreMessageMatcher | Partial<StoreMessage>, updater: StoreMessageUpdater| Partial<StoreMessage>, once?: boolean): updates one or more messages in the store
- * - remove(matcher: StoreMessageMatcher | Partial<StoreMessage>, once?: boolean): removes one or more messages from the store
- * - clear(): removes all messages from the store
  */
 @Injectable({
-  providedIn: MessagesModule
+  providedIn: MessagesModule,
 })
 export class StoreService {
   private messages: StoreMessage[] = [];
@@ -79,7 +71,11 @@ export class StoreService {
   /**
    * Updates one or more messages in the store
    */
-  update(matcher: StoreMessageMatchArg, updater: StoreMessageUpdater | Partial<StoreMessage>, once: boolean = false): number {
+  update(
+    matcher: StoreMessageMatchArg,
+    updater: StoreMessageUpdater | Partial<StoreMessage>,
+    once: boolean = false,
+  ): number {
     const matchFn = typeof matcher === 'function' ? matcher : createMatcher(matcher);
     const updateFn = typeof updater === 'function' ? updater : createUpdater(updater);
     let count = 0;

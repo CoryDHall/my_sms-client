@@ -3,20 +3,30 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BodyLengthComponent } from '../message-dashboard/body-length/body-length.component';
-import { MessagesModule } from '../messages/messages.module';
 import { MessagesInterfaceService } from '../messages/interface.service';
 import { MessageBase } from '../../models/Message';
+import { CommonModule } from '@angular/common';
 type NullablePartial<T> = {
   [P in keyof T]?: T[P] | null;
 };
 @Component({
   selector: 'app-message-dashboard-form',
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, BodyLengthComponent, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    BodyLengthComponent,
+    MatButtonModule,
+    MatProgressBarModule,
+  ],
   templateUrl: './message-dashboard-form.component.html',
-  styleUrl: './message-dashboard-form.component.scss'
+  styleUrl: './message-dashboard-form.component.scss',
 })
 export class MessageDashboardFormComponent {
   messageForm = new FormGroup({
@@ -28,6 +38,8 @@ export class MessageDashboardFormComponent {
       Validators.required,
     ]),
   })
+
+  inProgress = false;
 
   constructor(private messageInterface: MessagesInterfaceService) {}
 
@@ -41,7 +53,7 @@ export class MessageDashboardFormComponent {
         }
         this.enableForm();
       }, () => {
-        this.clearForm();
+        this.clearForm(true);
         this.enableForm();
       });
       this.disableForm()
@@ -50,15 +62,21 @@ export class MessageDashboardFormComponent {
 
   get messageBody() { return this.messageForm.get('body')?.value ?? ''; }
 
-  clearForm(): void {
-    this.messageForm.reset();
+  clearForm(onlyBody?: boolean): void {
+    this.messageForm.reset({
+      body: '',
+      ...onlyBody ? { phone_number: this.messageForm.value.phone_number } : { phone_number: '' },
+    });
+    this.messageForm.markAsUntouched();
   }
 
   disableForm(): void {
+    this.inProgress = true;
     this.messageForm.disable();
   }
 
   enableForm(): void {
+    this.inProgress = false;
     this.messageForm.enable();
   }
 

@@ -11,13 +11,13 @@ import { isPlatformBrowser } from '@angular/common';
   imports: [
     MatCardModule,
     MessageDashboardFormComponent,
-    MessageDashboardTableComponent
+    MessageDashboardTableComponent,
   ],
   providers: [
-    { provide: MAT_CARD_CONFIG, useValue: { appearance: 'raised' } }
+    { provide: MAT_CARD_CONFIG, useValue: { appearance: 'raised' } },
   ],
   templateUrl: './message-dashboard.component.html',
-  styleUrl: './message-dashboard.component.scss'
+  styleUrl: './message-dashboard.component.scss',
 })
 export class MessageDashboardComponent implements AfterViewInit {
 
